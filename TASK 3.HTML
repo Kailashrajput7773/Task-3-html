@@ -1,0 +1,261 @@
+<!-- ✅ FIXED HTML FILE START -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ApexPlanet - Task 3: Advanced Web Dev</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1, h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    section {
+      margin-bottom: 40px;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+    }
+
+    button {
+      display: block;
+      margin: 15px auto;
+      padding: 10px 20px;
+      background-color: orange;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #e09000;
+    }
+
+    .responsive-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .grid-item {
+      background-color: #e6e6e6;
+      padding: 15px;
+      border-radius: 5px;
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      .responsive-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .question {
+      margin-bottom: 20px;
+      font-size: 1.1rem;
+      font-weight: bold;
+    }
+
+    .options label {
+      display: block;
+      margin-bottom: 8px;
+      cursor: pointer;
+      padding: 8px;
+      border: 1px solid #eee;
+      border-radius: 5px;
+    }
+
+    .options label:hover {
+      background-color: #f0f0f0;
+    }
+
+    .options input[type="radio"] {
+      margin-right: 10px;
+    }
+
+    #quiz-result {
+      margin-top: 20px;
+      font-weight: bold;
+      text-align: center;
+      font-size: 1.2rem;
+      color: #28a745;
+    }
+
+    #quiz-result.incorrect {
+      color: #dc3545;
+    }
+
+    #quiz-result.correct {
+      color: #28a745;
+    }
+
+    #api-data-container {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    #joke-display {
+      background-color: #e0f7fa;
+      border: 1px solid #b2ebf2;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 15px;
+      font-style: italic;
+      font-size: 1.1rem;
+    }
+
+    #joke-error {
+      color: red;
+      margin-top: 10px;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 30px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>ApexPlanet Internship - Task 3</h1>
+    <p style="text-align: center;">Advanced Styling and JavaScript (Days 19–27)</p>
+
+    <!-- Section 1 -->
+    <section>
+      <h2>1. Responsive Design Demonstration</h2>
+      <p>This section demonstrates responsive design using CSS Grid and Media Queries.</p>
+      <div class="responsive-grid">
+        <div class="grid-item">Item 1 (Adapts to screen size)</div>
+        <div class="grid-item">Item 2 (Stacks on mobile)</div>
+        <div class="grid-item">Item 3 (Changes layout)</div>
+        <div class="grid-item">Item 4 (Fluid design)</div>
+      </div>
+    </section>
+
+    <!-- Section 2 -->
+    <section>
+      <h2>2. Interactive JavaScript Quiz</h2>
+      <div id="quiz-container">
+        <div class="question">What does HTML stand for?</div>
+        <div class="options">
+          <label><input type="radio" name="q1" value="a"> Hyper Text Markup Language</label>
+          <label><input type="radio" name="q1" value="b"> Hyperlink and Text Markup Language</label>
+          <label><input type="radio" name="q1" value="c"> Home Tool Markup Language</label>
+        </div>
+
+        <div class="question">Which CSS property is used for changing the font size?</div>
+        <div class="options">
+          <label><input type="radio" name="q2" value="a"> text-size</label>
+          <label><input type="radio" name="q2" value="b"> font-style</label>
+          <label><input type="radio" name="q2" value="c"> font-size</label>
+        </div>
+
+        <div class="question">Which JavaScript keyword is used to declare a variable?</div>
+        <div class="options">
+          <label><input type="radio" name="q3" value="a"> var</label>
+          <label><input type="radio" name="q3" value="b"> let</label>
+          <label><input type="radio" name="q3" value="c"> Both a and b</label>
+        </div>
+
+        <button onclick="submitQuiz()">Submit Quiz</button>
+        <div id="quiz-result"></div>
+      </div>
+    </section>
+
+    <!-- Section 3 -->
+    <section>
+      <h2>3. Fetch Data from a Public API (Joke API)</h2>
+      <div id="api-data-container">
+        <button onclick="fetchJoke()">Get a Random Joke</button>
+        <div id="joke-display">Click the button to fetch a joke!</div>
+        <div id="joke-error" style="display:none;"></div>
+      </div>
+    </section>
+  </div>
+
+  <footer>&copy; 2025 ApexPlanet Software Pvt Ltd</footer>
+
+  <script>
+    // Quiz Logic Fix
+    function submitQuiz() {
+      const answers = {
+        q1: 'a',
+        q2: 'c',
+        q3: 'c'
+      };
+      let score = 0;
+      const total = Object.keys(answers).length;
+      const quizResultDiv = document.getElementById('quiz-result');
+      quizResultDiv.className = '';
+
+      for (const questionId in answers) {
+        const selectedOption = document.querySelector(`input[name="${questionId}"]:checked`);
+        if (selectedOption && selectedOption.value === answers[questionId]) {
+          score++;
+        }
+      }
+
+      if (score === total) {
+        quizResultDiv.textContent = `Excellent! You got ${score} out of ${total} correct!`;
+        quizResultDiv.classList.add('correct');
+      } else {
+        quizResultDiv.textContent = `You got ${score} out of ${total} correct. Keep learning!`;
+        quizResultDiv.classList.add('incorrect');
+      }
+    }
+
+    // API Joke Logic
+    async function fetchJoke() {
+      const jokeDisplay = document.getElementById('joke-display');
+      const jokeError = document.getElementById('joke-error');
+      jokeDisplay.textContent = 'Fetching a joke...';
+      jokeError.style.display = 'none';
+
+      try {
+        const response = await fetch('https://v2.jokeapi.dev/joke/Programming?blacklistFlags=racist,sexist&type=single');
+        const data = await response.json();
+
+        if (response.ok && data.joke) {
+          jokeDisplay.textContent = data.joke;
+        } else {
+          jokeDisplay.textContent = 'Could not fetch a joke at this time.';
+          if (data.message) {
+            jokeError.textContent = `Error: ${data.message}`;
+            jokeError.style.display = 'block';
+          }
+        }
+      } catch (error) {
+        console.error('Fetch error:', error);
+        jokeDisplay.textContent = 'Failed to fetch joke.';
+        jokeError.textContent = `Network Error: ${error.message}`;
+        jokeError.style.display = 'block';
+      }
+    }
+  </script>
+</body>
+</html>
